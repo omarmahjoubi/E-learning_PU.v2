@@ -26,7 +26,7 @@ Route::get('/test', function() {
 
 
 Route::group(['middleware' => 'admin'], function () {
-	Route::post('cours/traiter_ajout_cours','CoursController@insert') ;
+	Route::post('cours/traiter_ajout_cours','CoursController@inserer') ;
 	Route::get('/cours/ajouter', function() {
 		return view("cours.ajout_cours") ;
 	}) ;

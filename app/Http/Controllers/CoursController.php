@@ -9,20 +9,25 @@ use App\Http\Requests;
 
 class CoursController extends Controller
 {
-    private $model_cour;
+     private $model_cour;
 
-
-    public function insert(Request $request)
+    public function __construct(Cour $cours) // Ioc du model dans le controlleur
     {
+        $this->model_cour = $cours ;
+    }
+
+
+    public function inserer(Request $request)
+    {
+
         $name = $request->input('name');
         $url = $request->input('url');
         $auteur = $request->input('auteur');
         $theme = $request->input('theme');
-        $model_cour = new Cour;
-        $model_cour->creer($name, $url, $auteur, $theme);
-        $model_cour->save();
+        $this->model_cour->creer($name, $url, $auteur, $theme);
+        $this->model_cour->save();
         $message = "Le cours a bien ete ajoute au catalogue de cours";
-        $liste_cours = Cour::all();
+        $liste_cours = $this->model_cour->lister();
         return view('cours.lister_cours', ['li_cours' => $liste_cours, 'msg_ajout' => $message]);
     }
 
@@ -33,7 +38,8 @@ class CoursController extends Controller
 
     public function extraire($id)
     {
-        $model_cour = Cour::find($id);
+
+        $model_cour = $this->model_cour->extract_by_id($id) ;
         $chemin = base_path() . '/public/pdf' . $model_cour->url;
         return view('cours.editer_cours', ['cours' => $model_cour], ['chemin' => $chemin]);
     }
@@ -41,7 +47,8 @@ class CoursController extends Controller
 
     public function lister()
     {
-        $liste_cours = Cour::all();
+
+        $liste_cours =$this->model_cour->lister() ;  ;
         return view('cours.lister_cours', ['li_cours' => $liste_cours]);
     }
 
@@ -52,8 +59,8 @@ class CoursController extends Controller
                     */
     public function update(Request $request, $id)
     {
-        $model_cour = Cour::find($id);
-        $ancien_nom= $model_cour->name ;
+        $model_cour =$this->model_cour->extract_by_id($id);
+        $ancien_nom = $model_cour->name ;
         $nv_nom  = $request->input('name');
         $model_cour->name = $nv_nom;
         $model_cour->auteur =  $request->input('auteur');
@@ -61,7 +68,7 @@ class CoursController extends Controller
         $model_cour->url =  $request->input('url');
         $model_cour->save();
         $message = 'les modifications ont bien ete prises en compte' ;
-        $liste_cours = Cour::all();
+        $liste_cours = $this->model_cour->lister() ;
         return view('cours.lister_cours', ['li_cours' => $liste_cours, 'msg_modif' => $message]);
 
     }
@@ -72,7 +79,7 @@ class CoursController extends Controller
     */
     public function delete($id)
     { //autre methode pour supprimer si on connait la clé primaire du tuple
-        $model_cour = Cour::destroy($id);
+       $this->model_cour->efface($id) ;
         return redirect('cours/lister');
     }
 

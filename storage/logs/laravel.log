@@ -4533,3 +4533,6 @@ Stack trace:
 #66 E:\wamp64\www\auth\public\index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #67 E:\wamp64\www\auth\server.php(21): require_once('E:\\wamp64\\www\\a...')
 #68 {main}  
+[2016-04-27 21:54:00] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function creer() on null' in E:\wamp64\www\auth\app\Http\Controllers\CoursController.php:28
+Stack trace:
+#0 {main}  

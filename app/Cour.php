@@ -22,6 +22,18 @@ class Cour extends Model
 
 
     } */
+	public function extract_by_id($id) {
+		return Cour::find($id) ;
+	}
+
+	public function lister() {
+		return Cour::all();
+	}
+	
+	public function efface($id) {
+		Cour::destroy($id) ;
+	}
+	
 	public function creer($name,$url,$auteur,$theme) {
 		$this->name=$name ;
 		$this->url=$url ;
