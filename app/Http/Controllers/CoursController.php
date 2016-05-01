@@ -24,7 +24,7 @@ class CoursController extends Controller
 
         $name = $request->input('name');
         $url = $request->input('url');
-        if (! Auteur::where('name',$request->input('auteur'))->count() == 0 ) {   // l'insertion de nouveaux auteurs ne marchent pas encore
+        if (Auteur::where('name',$request->input('auteur'))->count() == 0 ) {   
             $auteur = new Auteur ;
             $auteur->creer($request->input('auteur'));
             $auteur->save() ;
