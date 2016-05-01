@@ -6,7 +6,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Formulaire d'ajout d'un cours</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/cours/traiter_ajout_cours') }}">
+                        <form class="form-horizontal" role="form" method="POST"
+                              action="{{ url('/cours/traiter_ajout_cours') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Nom du cours:</label>
@@ -18,14 +19,23 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="auteur">Auteur :</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="auteur" name="auteur" placeholder="Enter de l'auteur">
+                                    <input type="text" list="cars" id="auteur" name="auteur" />
+                                    <datalist id="cars">
+                                        @foreach ($li_auteurs as $auteur)
+                                        <option>{{ $auteur->name }}</option>
+                                        @endforeach
+                                    </datalist>
                                 </div>
+
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="theme">Théme:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="theme" name="theme"
-                                           placeholder="Donner le théme du cours">
+                                        <select class="selectpicker" id="theme" name="theme">
+                                            @foreach ($li_themes as $theme)
+                                                <option>{{ $theme->name }}</option>
+                                            @endforeach
+                                        </select>
                                 </div>
                             </div>
                             <div class="form-group">

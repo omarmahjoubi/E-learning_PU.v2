@@ -27,9 +27,7 @@ Route::get('/test', function() {
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::post('cours/traiter_ajout_cours','CoursController@inserer') ;
-	Route::get('/cours/ajouter', function() {
-		return view("cours.ajout_cours") ;
-	}) ;
+	Route::get('/cours/ajouter',"AjoutController@lister") ;
 	Route::get('/cours/supprimer/{id}','CoursController@delete') ;
 	Route::get('/cours/editer/{id}','CoursController@extraire') ;
 	Route::post('/cours/modifier/{id}','CoursController@update') ;
@@ -42,5 +40,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/cours/lister', 'CoursController@lister');
 	Route::get('/cours/lister/{msg}', 'CoursController@lister');
 	Route::get('/cours/afficher/{url}','CoursController@display') ;
-
+    Route::get('/theme/{name}' , 'ThemeController@lister_cours') ;
 });

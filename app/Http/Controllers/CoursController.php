@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cour;
+use App\Auteur ;
+use App\Theme ;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,12 +24,18 @@ class CoursController extends Controller
 
         $name = $request->input('name');
         $url = $request->input('url');
-        $auteur = $request->input('auteur');
-        $theme = $request->input('theme');
-        $this->model_cour->creer($name, $url, $auteur, $theme);
+        if (! Auteur::where('name',$request->input('auteur'))->count() == 0 ) {   // l'insertion de nouveaux auteurs ne marchent pas encore
+            $auteur = new Auteur ;
+            $auteur->creer($request->input('auteur'));
+            $auteur->save() ;
+        }
+        $auteur_id = Auteur::where('name',$request->input('auteur'))->first(array('id')) ;
+        $theme_id = Theme::where('name',$request->input('theme'))->first(array('id')) ;
+        $this->model_cour->creer($name, $url, $auteur_id['id'], $theme_id['id']);
         $this->model_cour->save();
         $message = "Le cours a bien ete ajoute au catalogue de cours";
         $liste_cours = $this->model_cour->lister();
+        // return json_encode($liste_cours,JSON_FORCE_OBJECT); web service : retourner un objet JSON
         return view('cours.lister_cours', ['li_cours' => $liste_cours, 'msg_ajout' => $message]);
     }
 
@@ -48,8 +56,10 @@ class CoursController extends Controller
     public function lister()
     {
 
-        $liste_cours =$this->model_cour->lister() ;  ;
-        return view('cours.lister_cours', ['li_cours' => $liste_cours]);
+        $liste_cours =$this->model_cour->lister() ;
+        $model_theme = new Theme ;
+        $liste_theme = $model_theme->lister() ;
+        return view('cours.lister_cours', ['li_cours' => $liste_cours , 'li_themes' => $liste_theme]);
     }
 
     /*

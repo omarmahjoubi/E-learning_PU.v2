@@ -8,7 +8,7 @@ class Cour extends Model
 {
 	public $timestamps = false;
 	protected $fillable = [
-		'name', 'url', 'auteur','theme'] ;
+		'name', 'url', 'auteur_id','theme_id'] ;
 
 
   /*  public function __construct($name,$url,$auteur,$theme) {
@@ -34,10 +34,10 @@ class Cour extends Model
 		Cour::destroy($id) ;
 	}
 	
-	public function creer($name,$url,$auteur,$theme) {
+	public function creer($name,$url,$auteur_id,$theme_id) {
 		$this->name=$name ;
 		$this->url=$url ;
-		$this->auteur=$auteur ;
-		$this->theme=$theme ;
+		$this->auteur_id=$auteur_id ;
+		$this->theme_id=$theme_id ;
 	}
 }
