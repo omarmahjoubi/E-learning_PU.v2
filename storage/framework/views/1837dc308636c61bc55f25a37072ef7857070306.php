@@ -1,26 +1,26 @@
 <?php $__env->startSection('content'); ?>
-    <?php if( ! empty($msg_ajout)): ?>
+    <?php if( ! empty(session('msg_ajout'))): ?>
         <div class="alert alert-success">
             <div class="alert alert-success">
-                <strong>Success! </strong><?php echo e($msg_ajout); ?>
+                <strong>Success! </strong><?php echo e(session('msg_ajout')); ?>
 
             </div>
             <?php endif; ?>
-            <?php if( ! empty($msg_modif)): ?>
+            <?php if( ! empty(session('msg_modif'))): ?>
                 <div class="alert alert-success">
                     <div class="alert alert-success">
-                        <strong>Success! </strong><?php echo e($msg_modif); ?>
+                        <strong>Success! </strong><?php echo e(session('msg_modif')); ?>
 
                     </div>
                     <?php endif; ?>
                 </div>
                 <div class="box-content">
+                    <h1><?php echo e($nom_theme); ?></h1>
                     <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                         <thead>
                         <tr>
                             <th>nom du cours</th>
                             <th>auteur du cours</th>
-                            <th>theme du cours</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -28,8 +28,7 @@
                         <?php foreach($li_cours as $cours): ?>
                             <tr>
                                 <td><?php echo e($cours->name); ?></td>
-                                <td class="center"><?php echo e($cours->auteur); ?></td>
-                                <td class="center"><?php echo e($cours->theme); ?></td>
+                                <td class="center"><?php echo e($cours->auteur_name); ?></td>
                                 <td>
                                     <a class="btn btn-success" href="/cours/afficher/<?php echo e($cours->url); ?>">
                                         <i class="glyphicon glyphicon-zoom-in icon-white"></i>

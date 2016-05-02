@@ -50,7 +50,7 @@
                     <li><a href="<?php echo e(url('/home')); ?>">Home</a></li>
                     <?php if(Auth::guest()): ?>
                     <?php else: ?>
-                        <li><a href="<?php echo e(url('/cours/lister')); ?>">Nos Cours</a></li>
+                        <li><a href="<?php echo e(url('/theme/lister')); ?>">Nos Thémes</a></li>
                     <?php endif; ?>
                     <?php if(Auth::user()): ?>
                     <?php if(Auth::user()->admin==1): ?>

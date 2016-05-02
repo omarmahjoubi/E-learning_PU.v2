@@ -13,13 +13,9 @@ class AlterCoursTable extends Migration
     public function up()
     {
         Schema::table('cours', function ($table) {
-            $table->dropColumn('theme');
-            $table->integer('theme_id')->unsigned();
-            $table->foreign('theme_id')->references('id')->on('themes')->OnDelete('cascade');
-            $table->dropColumn('auteur');
             $table->integer('auteur_id')->unsigned()->nullable();
-            $table->foreign('theme_id')->references('id')->on('auteurs')->OnDelete('set null');
-        }); 
+            $table->foreign('auteur_id')->references('id')->on('auteurs')->OnDelete('set null');
+        });
     }
 
     /**
@@ -29,8 +25,7 @@ class AlterCoursTable extends Migration
      */
     public function down()
     {
-        Schema::table('cours', function(Blueprint $table){
-            $table->dropColumn('theme_id');
+        Schema::table('cours', function ($table) {
             $table->dropColumn('auteur_id');
         });
     }

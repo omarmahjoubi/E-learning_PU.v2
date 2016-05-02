@@ -21,7 +21,6 @@ class CoursController extends Controller
 
     public function inserer(Request $request)
     {
-
         $name = $request->input('name');
         $url = $request->input('url');
         if (Auteur::where('name',$request->input('auteur'))->count() == 0 ) {   
@@ -34,9 +33,8 @@ class CoursController extends Controller
         $this->model_cour->creer($name, $url, $auteur_id['id'], $theme_id['id']);
         $this->model_cour->save();
         $message = "Le cours a bien ete ajoute au catalogue de cours";
-        $liste_cours = $this->model_cour->lister();
         // return json_encode($liste_cours,JSON_FORCE_OBJECT); web service : retourner un objet JSON
-        return view('cours.lister_cours', ['li_cours' => $liste_cours, 'msg_ajout' => $message]);
+        return redirect('/theme/lister_cours/'.$request->input('theme'))->with('msg_ajout' , $message) ;
     }
 
     public function display($url)
@@ -48,8 +46,13 @@ class CoursController extends Controller
     {
 
         $model_cour = $this->model_cour->extract_by_id($id) ;
+        $id_theme = $model_cour->theme->id ;
+        $nom_auteur = $model_cour->auteur->name;
         $chemin = base_path() . '/public/pdf' . $model_cour->url;
-        return view('cours.editer_cours', ['cours' => $model_cour], ['chemin' => $chemin]);
+        $liste_auteurs = Auteur::all() ;
+        $liste_theme = Theme::all() ;
+        return view('cours.editer_cours', ['cours' => $model_cour , 'nom_auteur' => $nom_auteur , 'id_theme' => $id_theme ,
+            'li_auteurs' => $liste_auteurs , 'li_themes' => $liste_theme], ['chemin' => $chemin]);
     }
 
 
@@ -73,14 +76,15 @@ class CoursController extends Controller
         $ancien_nom = $model_cour->name ;
         $nv_nom  = $request->input('name');
         $model_cour->name = $nv_nom;
-        $model_cour->auteur =  $request->input('auteur');
-        $model_cour->theme =  $request->input('theme');
+        $auteur_id =  Auteur::where('name',$request->input('auteur'))->first(array('id'));
+        $theme_id =  Theme::where('name',$request->input('theme'))->first(array('id')) ;
+        $model_cour->auteur_id = $auteur_id['id'] ;
+        $model_cour->theme_id = $theme_id['id'] ;
         $model_cour->url =  $request->input('url');
         $model_cour->save();
         $message = 'les modifications ont bien ete prises en compte' ;
         $liste_cours = $this->model_cour->lister() ;
-        return view('cours.lister_cours', ['li_cours' => $liste_cours, 'msg_modif' => $message]);
-
+        return redirect('/theme/lister_cours/'.$request->input('theme'))->with('msg_modif' , $message) ;
     }
 
     /* public function delete($name) {
@@ -89,8 +93,9 @@ class CoursController extends Controller
     */
     public function delete($id)
     { //autre methode pour supprimer si on connait la clé primaire du tuple
-       $this->model_cour->efface($id) ;
-        return redirect('cours/lister');
+        $theme_name = Cour::find($id)->theme->name ;
+        $this->model_cour->efface($id) ;
+        return redirect('theme/lister_cours/'.$theme_name);
     }
 
 

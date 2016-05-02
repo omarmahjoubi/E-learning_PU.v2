@@ -40,4 +40,12 @@ class Cour extends Model
 		$this->auteur_id=$auteur_id ;
 		$this->theme_id=$theme_id ;
 	}
+	
+	public function auteur() {
+		return $this->belongsTo('App\Auteur') ;
+	}
+	
+	public function theme() {
+		return $this->belongsTo('App\Theme') ;
+	}
 }

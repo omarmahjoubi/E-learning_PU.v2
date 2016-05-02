@@ -40,5 +40,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/cours/lister', 'CoursController@lister');
 	Route::get('/cours/lister/{msg}', 'CoursController@lister');
 	Route::get('/cours/afficher/{url}','CoursController@display') ;
-    Route::get('/theme/{name}' , 'ThemeController@lister_cours') ;
+    Route::get('/theme/lister_cours/{name}' , 'ThemeController@lister_cours') ;
+	Route::get('/theme/lister','ThemeController@lister') ;
 });

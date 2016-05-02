@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AlterCoursTable' => $baseDir . '/database/migrations/2016_05_01_110646_alter_cours_table.php',
+    'AlterThemesTables' => $baseDir . '/database/migrations/2016_05_02_182734_alter_themes_tables.php',
     'AlterUserTable' => $baseDir . '/database/migrations/2016_04_25_181849_alter_user_table.php',
     'CoursTable' => $baseDir . '/database/migrations/2016_04_25_133011_cours_table.php',
     'CreateAuteurTable' => $baseDir . '/database/migrations/2016_05_01_104243_create_auteur_table.php',

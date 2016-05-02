@@ -50,7 +50,7 @@
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     @if (Auth::guest())
                     @else
-                        <li><a href="{{ url('/cours/lister') }}">Nos Cours</a></li>
+                        <li><a href="{{ url('/theme/lister') }}">Nos Thémes</a></li>
                     @endif
                     @if (Auth::user())
                     @if (Auth::user()->admin==1)

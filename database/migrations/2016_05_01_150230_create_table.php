@@ -27,6 +27,6 @@ class CreateTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cours');
+        Schema::drop('cour_user');
     }
 }
