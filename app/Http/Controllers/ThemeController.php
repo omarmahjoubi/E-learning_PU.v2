@@ -18,6 +18,13 @@ class ThemeController extends Controller
     {
         $this->model_theme = $theme ;
     }
+    
+    public function inserer(Request $request) {
+        $name = $request->input('name') ;
+        $description = $request->input('description') ;
+        $this->model_theme->inserer($name,$description) ;
+        return redirect('/theme/lister') ;
+    }
 
     public function lister_cours($name) {
         $theme_id = Theme::where('name',$name)->first(array('id')) ;  // il faut déterminer l'id fu themes pour ensuite
@@ -35,5 +42,10 @@ class ThemeController extends Controller
     public function lister() {
         $liste_themes = $this->model_theme->lister() ;
         return view('theme.lister_themes' , ['li_themes' => $liste_themes]) ;
+    }
+
+    public function effacer($id) {
+        $this->model_theme->effacer($id) ;
+        return redirect('/theme/lister') ;
     }
 }

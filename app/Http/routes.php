@@ -31,6 +31,11 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/cours/supprimer/{id}','CoursController@delete') ;
 	Route::get('/cours/editer/{id}','CoursController@extraire') ;
 	Route::post('/cours/modifier/{id}','CoursController@update') ;
+	Route::get('/theme/supprimer/{id}','ThemeController@effacer') ;
+	Route::get('/theme/ajouter', function() {
+		return view("theme.ajout_theme") ;
+	}) ;
+	Route::post('theme/traiter_ajout_theme','ThemeController@inserer') ;
 
 }) ;
 
