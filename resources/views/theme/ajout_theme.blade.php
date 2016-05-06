@@ -27,12 +27,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="url_img">Image du théme:</label>
+                                <label class="control-label col-sm-2" for="url_img">Fichier du cours:</label>
                                 <div class="col-sm-10">
-                                    <label for="exampleInputFile">File input</label>
-                                    <input type="file" id="exampleInputFile">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <span class="btn btn-default btn-file"><input
+                                                    type="file" id="url_img" name="url_img"/></span>
                                     </div>
                                 </div>
+                            </div>
+
 
 
 

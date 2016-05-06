@@ -22,9 +22,12 @@ class ThemeController extends Controller
     public function inserer(Request $request) {
         $name = $request->input('name') ;
         $description = $request->input('description') ;
-        $this->model_theme->inserer($name,$description) ;
+        $url_img = $request->input('url_img') ;
+        $this->model_theme->inserer($name,$description,$url_img) ;
         return redirect('/theme/lister') ;
     }
+
+    
 
     public function lister_cours($name) {
         $theme_id = Theme::where('name',$name)->first(array('id')) ;  // il faut déterminer l'id fu themes pour ensuite
@@ -41,7 +44,18 @@ class ThemeController extends Controller
     
     public function lister() {
         $liste_themes = $this->model_theme->lister() ;
-        return view('theme.lister_themes' , ['li_themes' => $liste_themes]) ;
+        $taille = count($liste_themes) ;
+        $i = 0 ;
+        $nb_tour = 0 ;
+        $max = 3 ;
+        $j= 0 ;
+        return view('theme.lister_theme1' , ['li_themes' => $liste_themes , "taille" => $taille ,'i' => $i ,
+            'nb_tour' => $nb_tour , 'max' => $max , 'j'=>$j]) ;
+    }
+
+    public function liste_home() {
+        $liste_themes = $this->model_theme->lister() ;
+        return view('welcome',['li_themes' => $liste_themes]) ;
     }
 
     public function effacer($id) {

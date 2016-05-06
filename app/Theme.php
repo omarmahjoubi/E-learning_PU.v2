@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Theme extends Model
 {
     public $timestamps = false;
-    protected $fillable = [ 'name','description' ] ;
+    protected $fillable = [ 'name','description', 'url_img' ] ;
 
-    public function inserer($name , $description) {
+    public function inserer($name , $description , $url_img ) {
         $this->name = $name ;
         $this->description = $description ;
+        $this->url_img = $url_img ;
         $this->save() ;
     }
 

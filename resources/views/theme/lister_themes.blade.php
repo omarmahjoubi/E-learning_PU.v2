@@ -12,14 +12,17 @@
             <tbody>
             @foreach ($li_themes as $theme)
                 <tr>
-                    <td>{{ $theme->name }}</td>
+                    <td>
+                        <img src="{{URL::asset('/images/'.$theme->url_img)}}" alt="profile Pic" height="200"
+                             width="200">
+                        <figcaption>{{ $theme->name }}</figcaption>
+                    </td>
                     <td class="center">{{ $theme->description}}</td>
                     <td>
                         <a class="btn btn-info" href="/theme/lister_cours/{{ $theme->name }}">
                             <i class="glyphicon glyphicon-edit icon-white"></i>
                             Lister les cours
                         </a>
-
                         @if(Auth::user()->admin == 1)
                             <a class="btn btn-danger" href="/theme/supprimer/{{ $theme->id }}">
                                 <i class="glyphicon glyphicon-trash icon-white"></i>

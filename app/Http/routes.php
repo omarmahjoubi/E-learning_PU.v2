@@ -12,17 +12,12 @@
 */
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', "ThemeController@liste_home");
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/test', function() {
-	return view("cours.ajout_cours") ;
-}) ;
+
 
 
 Route::group(['middleware' => 'admin'], function () {
