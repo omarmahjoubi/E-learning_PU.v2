@@ -25,7 +25,32 @@
         .fa-btn {
             margin-right: 6px;
         }
+        .stylish-panel {
+            padding: 20px 0;
+            text-align: center;
+        }
+        .stylish-panel > div > div{
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+        .stylish-panel > div:hover > div{
+            margin-top: -10px;
+            border: 1px solid rgb(200, 200, 200);
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
+            background: rgba(200, 200, 200, 0.1);
+            transition: 0.5s;
+        }
 
+        .stylish-panel > div:hover img {
+            border-radius: 50%;
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
 
 
 
@@ -57,7 +82,7 @@
                 <li><a href="<?php echo e(url('/home')); ?>">Home</a></li>
                 <?php if(Auth::guest()): ?>
                 <?php else: ?>
-                    <li><a href="<?php echo e(url('/theme/lister')); ?>">Nos Thémes</a></li>
+                    <li><a href="/theme/lister/<?php echo e(Auth::user()->id); ?>">Nos Thémes</a></li>
                 <?php endif; ?>
                 <?php if(Auth::user()): ?>
                     <?php if(Auth::user()->admin==1): ?>

@@ -31,6 +31,8 @@ Route::group(['middleware' => 'admin'], function () {
 		return view("theme.ajout_theme") ;
 	}) ;
 	Route::post('theme/traiter_ajout_theme','ThemeController@inserer') ;
+	Route::get('/theme/editer/{id}','ThemeController@extraire') ;
+	Route::post('/theme/modifier/{id}','ThemeController@update') ;
 
 }) ;
 
@@ -41,5 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/cours/lister/{msg}', 'CoursController@lister');
 	Route::get('/cours/afficher/{url}','CoursController@display') ;
     Route::get('/theme/lister_cours/{name}' , 'ThemeController@lister_cours') ;
-	Route::get('/theme/lister','ThemeController@lister') ;
+	Route::get('/theme/lister/{id}','ThemeController@lister') ;
+	Route::get('/suivre_theme/{user_id}/{theme_id}' , 'SuivreThemeController@suivreTheme') ;
+	Route::get('/annuler_suivi_theme/{user_id}/{theme_id}','SuivreThemeController@annulerSuivi') ;
+	
 });

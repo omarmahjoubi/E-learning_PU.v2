@@ -23,4 +23,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function extract_by_id($id) {
+        return User::find($id) ;
+    }
+    
+    public function themes() {
+        return $this->belongsToMany('App\Theme') ;
+    }
 }

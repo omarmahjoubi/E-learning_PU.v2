@@ -32,9 +32,9 @@ class CoursController extends Controller
         $theme_id = Theme::where('name',$request->input('theme'))->first(array('id')) ;
         $this->model_cour->creer($name, $url, $auteur_id['id'], $theme_id['id']);
         $this->model_cour->save();
-        $message = "Le cours a bien ete ajoute au catalogue de cours";
+        $message = "Le cours $name a bien été ajouté au catalogue de cours";
         // return json_encode($liste_cours,JSON_FORCE_OBJECT); web service : retourner un objet JSON
-        return redirect('/theme/lister_cours/'.$request->input('theme'))->with('msg_ajout' , $message) ;
+        return redirect('/theme/lister_cours/'.$request->input('theme'))->with('msg_ajout' , $message);
     }
 
     public function display($url)
@@ -82,7 +82,7 @@ class CoursController extends Controller
         $model_cour->theme_id = $theme_id['id'] ;
         $model_cour->url =  $request->input('url');
         $model_cour->save();
-        $message = 'les modifications ont bien ete prises en compte' ;
+        $message = "les modifications opérées sur le cours $nv_nom ont bien ete prises en compte" ;
         $liste_cours = $this->model_cour->lister() ;
         return redirect('/theme/lister_cours/'.$request->input('theme'))->with('msg_modif' , $message) ;
     }

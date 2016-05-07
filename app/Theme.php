@@ -17,8 +17,27 @@ class Theme extends Model
         $this->save() ;
     }
 
+    public function getName() {
+        return $this->name ;
+    }
+    
+    public function getId(){
+        return $this->id ;
+    }
+
     public function lister() {
         return Theme::all();
+    }
+
+    public function extract_by_id($id) {
+        return Theme::find($id) ;
+    }
+    
+    public function modifier($name,$description,$url_img) {
+        $this->name = $name ;
+        $this->description = $description ;
+        $this->url_img = $url_img ;
+        $this->save() ;
     }
 
     public function cours() {
@@ -27,5 +46,9 @@ class Theme extends Model
     
     public function effacer($id) {
         Theme::destroy($id) ;
+    }
+
+    public function users() {
+        return $this->belongsToMany('App\User') ;
     }
 }

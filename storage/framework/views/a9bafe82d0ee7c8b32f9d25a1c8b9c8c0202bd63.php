@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Formulaire d'ajout d'un cours</div>
+                    <div class="panel-heading">Formulaire de modification du cours <?php echo e($cours->name); ?></div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST"
                               action="/cours/modifier/<?php echo e($cours->id); ?>">
