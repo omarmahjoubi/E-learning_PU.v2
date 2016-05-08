@@ -3,14 +3,14 @@
 @section('content')
 
 
-    <div class ="container">
+
         <div class="page-header">
             <h1 class="text-center">Nos Thémes</h1>
         </div>
 
 
 
-   <div class="container">
+
         <div id="myCarousel" class="carousel slide" data-ride="carousel"
              style="width:800px; margin: 0 auto ; height :400px">
             <!-- Indicators -->
@@ -53,8 +53,7 @@
                 @endfor
             </div>
         </div>
-       </div>
-    </div>
+
 
 
     <!-- Left and right controls -->
@@ -70,6 +69,6 @@
 
     <footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <!--  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
     </footer>
 @endsection

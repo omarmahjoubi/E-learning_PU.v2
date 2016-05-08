@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-
+    <link rel="stylesheet" href="{{base_path()}} . '/public/pdf/' . $url">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css">
     <style>
         body {
             font-family: 'Lato';
@@ -25,17 +27,20 @@
         .fa-btn {
             margin-right: 6px;
         }
+
         .stylish-panel {
             padding: 20px 0;
             text-align: center;
         }
-        .stylish-panel > div > div{
+
+        .stylish-panel > div > div {
             padding: 10px;
             border: 1px solid transparent;
             border-radius: 4px;
             transition: 0.2s;
         }
-        .stylish-panel > div:hover > div{
+
+        .stylish-panel > div:hover > div {
             margin-top: -10px;
             border: 1px solid rgb(200, 200, 200);
             box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
@@ -51,8 +56,6 @@
             -ms-transform: rotate(360deg);
             transform: rotate(360deg);
         }
-
-
 
     </style>
 </head>
@@ -71,18 +74,36 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
-                E-learning
-            </a>
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a class="navbar-brand" href="{{ url('/') }}" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
+                        E-learning<span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        @if (Auth::user())
+                            <li><a href="/user/info/{{ Auth::user()->id }}">Mon profil</a></li>
+                            <li><a href="/user/editer/{{ Auth::user()->id }}">Editer mon Profil</a></li>
+                            @if(Auth::user()->admin !=1)
+                                <li><a href="/user/lister_themes_suivi/{{ Auth::user()->id }}">Mes Thémes</a></li>
+                            @endif
+                            @if(Auth::user()->admin==1)
+                                <li><a href="/lister_users">Lister les utlisateurs</a></li>
+                            @endif
+                        @endif
+                    </ul>
+                </li>
+            </ul>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">Home</a></li>
+                <li><a href="{{ url('/home') }}">Acceuil</a></li>
                 @if (Auth::guest())
                 @else
-                    <li><a href="/theme/lister/{{Auth::user()->id}}">Nos Thémes</a></li>
+                    <li><a href="/theme/lister/{{ Auth::user()->id}}">Nos Thémes</a></li>
                 @endif
                 @if (Auth::user())
                     @if (Auth::user()->admin==1)
@@ -101,7 +122,7 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->pseudo}} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

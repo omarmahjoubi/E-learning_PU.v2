@@ -7,6 +7,7 @@ use App\Theme;
 use App\Cour;
 use App\Auteur;
 use App\User;
+use Illuminate\Support\Facades\Redirect ;
 
 
 use App\Http\Requests;
@@ -20,14 +21,14 @@ class ThemeController extends Controller
         $this->model_theme = $theme;
     }
 
-    public function inserer(Request $request)
+    public function inserer(Request $request,$admin_id)
     {
         $name = $request->input('name');
         $description = $request->input('description');
         $url_img = $request->input('url_img');
         $this->model_theme->inserer($name, $description, $url_img);
         $msg = "le théme $name a bien été ajouté au catalogue de théme";
-        return redirect('/theme/lister')->with('msg_ajout', $msg);
+        return \Redirect::route('lister_themes', $admin_id)->with('msg_modif', $msg);
     }
 
 
@@ -95,8 +96,7 @@ class ThemeController extends Controller
 
         }
 
-        public
-        function update(Request $request, $id)
+        public function update(Request $request, $id,$admin_id)
         {
             $this->model_theme = $this->model_theme->extract_by_id($id);
             $name = $request->input('name');
@@ -104,7 +104,9 @@ class ThemeController extends Controller
             $url_img = $request->input('url_img');
             $this->model_theme->modifier($name, $description, $url_img);
             $msg = "le théme $name a bien été modifié ";
-            return redirect('/theme/lister')->with('msg_modif', $msg);
+         //   return redirect('/theme/lister')->with('msg_modif', $msg);
+            return \Redirect::route('lister_themes', $admin_id)->with('msg_modif', $msg);
+           
         }
 
         public
@@ -118,6 +120,6 @@ class ThemeController extends Controller
         function effacer($id)
         {
             $this->model_theme->effacer($id);
-            return redirect('/theme/lister');
+            return back();
         }
     }

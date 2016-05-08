@@ -9,15 +9,15 @@
                         <?php echo csrf_field(); ?>
 
 
-                        <div class="form-group<?php echo e($errors->has('name') ? ' has-error' : ''); ?>">
-                            <label class="col-md-4 control-label">Name</label>
+                        <div class="form-group<?php echo e($errors->has('psuedo') ? ' has-error' : ''); ?>">
+                            <label class="col-md-4 control-label">Pseudo</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" value="<?php echo e(old('name')); ?>">
+                                <input type="text" class="form-control" name="pseudo" value="<?php echo e(old('pseudo')); ?>">
 
-                                <?php if($errors->has('name')): ?>
+                                <?php if($errors->has('pseudo')): ?>
                                     <span class="help-block">
-                                        <strong><?php echo e($errors->first('name')); ?></strong>
+                                        <strong><?php echo e($errors->first('pseudo')); ?></strong>
                                     </span>
                                 <?php endif; ?>
                             </div>

@@ -7,7 +7,7 @@
                     <div class="panel-heading">Formulaire de modification du théme {{ $theme->name }}</div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST"
-                              action="/theme/modifier/{{ $theme->id }}">
+                              action="/theme/modifier/{{ $theme->id }}/{{Auth::user()->id}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Nom du théme:</label>

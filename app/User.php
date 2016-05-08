@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'pseudo', 'email', 'password', 'nom' , 'prenom' , 'sexe' , 'telephone'
     ];
 
     /**
@@ -28,7 +28,21 @@ class User extends Authenticatable
         return User::find($id) ;
     }
     
+    public function lister() {
+        return User::all() ;
+    }
+    
     public function themes() {
         return $this->belongsToMany('App\Theme') ;
+    }
+
+    public function modifier($pseudo,$nom,$prenom,$email,$telephone,$sexe) {
+        $this->nom = $nom;
+        $this->prenom = $prenom ;
+        $this->pseudo = $pseudo ;
+        $this->email = $email ;
+        $this->telephone = $telephone ;
+        $this->sexe = $sexe ;
+        $this->save() ;
     }
 }

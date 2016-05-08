@@ -7,7 +7,7 @@
                     <div class="panel-heading">Formulaire d'ajout d'un théme</div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST"
-                              action="{{ url('/theme/traiter_ajout_theme') }}">
+                              action="/theme/traiter_ajout_theme/{{Auth::user()->id}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Nom du théme:</label>
