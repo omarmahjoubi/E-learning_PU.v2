@@ -40,6 +40,10 @@ class Theme extends Model
         $this->save() ;
     }
 
+    public function lister_new() {
+        return Theme::orderBy('id','desc')->take(4)->get() ;
+    }
+
     public function cours() {
         return $this->hasMany('App\Cour') ;
     }

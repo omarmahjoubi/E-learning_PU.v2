@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         @if(Auth::user()->admin == 1)
-                            Profil de l'utilisateur {{ $user->pseudo }}
+                            Profil de l'utilisateur {{ $user->name }}
                         @else
                             Votre Profil
                         @endif
@@ -14,51 +14,36 @@
                     <div class="panel-body">
                         @if( ! empty(session('msg_modif')))
                             <div class="alert alert-success" role="alert">
-                                <strong>{{ session('msg_modif') }}</strong>
+                                @if(Auth::user()->admin==1)
+                                    <strong>Le profil de l'utilisateur {{ $user->name }} a été modifié</strong>
+                                    @else
+                                    <strong>{{ session('msg_modif') }}</strong>
+                                    @endif
                             </div>
                         @endif
                         <div class="list-group">
                             <a href="#" class="list-group-item active">
                                 <h4 class="list-group-item-heading">
-                                    Informations personels
+                                    Informations personelles
                                 </h4>
                             </a>
 
                             <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">
-                                    Pseudo
+                                    Username
+                                </h4>
+
+                                <p class="list-group-item-text">
+                                    {{ $user ->name }}
                                     @if($user->sexe === "M")
                                         <img src="{{URL::asset('user/male.png')}}">
                                     @elseif($user->sexe === "F")
                                         <img src="{{URL::asset('user/female.png')}}">
                                     @else
                                     @endif
-                                </h4>
-
-                                <p class="list-group-item-text">
-                                    {{ $user ->pseudo }}
                                 </p>
                             </a>
 
-                            <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading">
-                                    Nom
-                                </h4>
-
-                                <p class="list-group-item-text">
-                                    {{ $user ->nom }}
-                                </p>
-                            </a>
-
-                            <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading">
-                                    Prenom
-                                </h4>
-
-                                <p class="list-group-item-text">
-                                    {{ $user ->prenom }}
-                                </p>
-                            </a>
 
                             <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">
@@ -72,12 +57,15 @@
 
                             <a href="#" class="list-group-item">
                                 <h4 class="list-group-item-heading">
-                                    Telphone
+                                    Telephone
                                 </h4>
 
-                                <p class="list-group-item-text">
-                                    {{ $user ->telephone }}
-                                </p>
+                                    <p class="list-group-item-text">
+                                        {{ !empty($user->telephone) ? $user->telephone : "non spécifié" }}
+                                    </p>
+
+
+
                             </a>
 
 

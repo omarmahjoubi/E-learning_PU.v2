@@ -74,33 +74,41 @@
             </button>
 
             <!-- Branding Image -->
-            <ul class="nav navbar-nav navbar-left">
-                <li class="dropdown">
-                    <a class="navbar-brand" href="{{ url('/') }}" class="dropdown-toggle" data-toggle="dropdown"
-                       role="button" aria-expanded="false">
-                        E-learning<span class="caret"></span>
-                    </a>
 
-                    <ul class="dropdown-menu" role="menu">
-                        @if (Auth::user())
-                            <li><a href="/user/info/{{ Auth::user()->id }}">Mon profil</a></li>
-                            <li><a href="/user/editer/{{ Auth::user()->id }}">Editer mon Profil</a></li>
-                            @if(Auth::user()->admin !=1)
-                                <li><a href="/user/lister_themes_suivi/{{ Auth::user()->id }}">Mes Thémes</a></li>
-                            @endif
-                            @if(Auth::user()->admin==1)
-                                <li><a href="/lister_users">Lister les utlisateurs</a></li>
-                            @endif
-                        @endif
+
+            @if (Auth::user())
+                <ul class="nav navbar-nav navbar-left">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a class="navbar-brand" href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-expanded="false">
+                                E-learning<span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/user/info/{{ Auth::user()->id }}">Mon profil</a></li>
+                                <li><a href="/user/editer/{{ Auth::user()->id }}">Editer mon profil</a></li>
+                                @if(Auth::user()->admin !=1)
+                                    <li><a href="/user/lister_themes_suivi/{{ Auth::user()->id }}">Mes Thémes</a></li>
+                                @endif
+                                @if(Auth::user()->admin==1)
+                                    <li><a href="/lister/users">Lister les utilisateurs</a></li>
+                                @endif
+                                @else
+                                    <a class="navbar-brand" href="{{ url('/') }}">
+                                        E-learning
+                                    </a>
+
+                                @endif
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-            </ul>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">Acceuil</a></li>
+                <li><a href="{{ url('/') }}">Acceuil</a></li>
                 @if (Auth::guest())
                 @else
                     <li><a href="/theme/lister/{{ Auth::user()->id}}">Nos Thémes</a></li>
@@ -122,7 +130,7 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->pseudo}} <span class="caret"></span>
+                            {{ Auth::user()->name}} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

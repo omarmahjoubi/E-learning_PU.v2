@@ -112,12 +112,11 @@ class ThemeController extends Controller
         public
         function liste_home()
         {
-            $liste_themes = $this->model_theme->lister();
+            $liste_themes = $this->model_theme->lister_new();
             return view('welcome', ['li_themes' => $liste_themes]);
         }
 
-        public
-        function effacer($id)
+        public function effacer($id)
         {
             $this->model_theme->effacer($id);
             return back();

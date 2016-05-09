@@ -74,33 +74,41 @@
             </button>
 
             <!-- Branding Image -->
-            <ul class="nav navbar-nav navbar-left">
-                <li class="dropdown">
-                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>" class="dropdown-toggle" data-toggle="dropdown"
-                       role="button" aria-expanded="false">
-                        E-learning<span class="caret"></span>
-                    </a>
 
-                    <ul class="dropdown-menu" role="menu">
-                        <?php if(Auth::user()): ?>
-                            <li><a href="/user/info/<?php echo e(Auth::user()->id); ?>">Mon profil</a></li>
-                            <li><a href="/user/editer/<?php echo e(Auth::user()->id); ?>">Editer mon Profil</a></li>
-                            <?php if(Auth::user()->admin !=1): ?>
-                                <li><a href="/user/lister_themes_suivi/<?php echo e(Auth::user()->id); ?>">Mes Thémes</a></li>
-                            <?php endif; ?>
-                            <?php if(Auth::user()->admin==1): ?>
-                                <li><a href="/lister_users">Lister les utlisateurs</a></li>
-                            <?php endif; ?>
-                        <?php endif; ?>
+
+            <?php if(Auth::user()): ?>
+                <ul class="nav navbar-nav navbar-left">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a class="navbar-brand" href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-expanded="false">
+                                E-learning<span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/user/info/<?php echo e(Auth::user()->id); ?>">Mon profil</a></li>
+                                <li><a href="/user/editer/<?php echo e(Auth::user()->id); ?>">Editer mon profil</a></li>
+                                <?php if(Auth::user()->admin !=1): ?>
+                                    <li><a href="/user/lister_themes_suivi/<?php echo e(Auth::user()->id); ?>">Mes Thémes</a></li>
+                                <?php endif; ?>
+                                <?php if(Auth::user()->admin==1): ?>
+                                    <li><a href="/lister/users">Lister les utilisateurs</a></li>
+                                <?php endif; ?>
+                                <?php else: ?>
+                                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+                                        E-learning
+                                    </a>
+
+                                <?php endif; ?>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-            </ul>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="<?php echo e(url('/home')); ?>">Acceuil</a></li>
+                <li><a href="<?php echo e(url('/')); ?>">Acceuil</a></li>
                 <?php if(Auth::guest()): ?>
                 <?php else: ?>
                     <li><a href="/theme/lister/<?php echo e(Auth::user()->id); ?>">Nos Thémes</a></li>
@@ -122,7 +130,7 @@
                 <?php else: ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <?php echo e(Auth::user()->pseudo); ?> <span class="caret"></span>
+                            <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

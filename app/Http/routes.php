@@ -33,8 +33,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::post('theme/traiter_ajout_theme/{admin_id}','ThemeController@inserer') ;
 	Route::get('/theme/editer/{id}','ThemeController@extraire') ;
 	Route::post('/theme/modifier/{id}/{admin_id}','ThemeController@update') ;
-	Route::get('/lister_users','AdminController@lister');
-
+	Route::get('/lister/users', ['as' => 'lister_users', 'uses' =>'AdminController@lister']);
+	Route::get('/user/supprimer/{id}','UserController@supprimer') ;
 }) ;
 
 

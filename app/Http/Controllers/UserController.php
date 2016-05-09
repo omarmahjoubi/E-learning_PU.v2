@@ -31,13 +31,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->model_user = $this->model_user->extract_by_id($id);
-        $nom = $request->input('nom');
-        $prenom = $request->input('prenom');
-        $pseudo = $request->input('pseudo');
+
+        $name = $request->input('name');
         $email = $request->input('email');
         $telephone = $request->input('telephone');
         $sexe = $request->input('sexe');
-        $this->model_user->modifier($pseudo,$nom,$prenom,$email,$telephone,$sexe);
+        $this->model_user->modifier($name,$email,$telephone,$sexe);
         $msg = "votre profil a bien été modifié";
         //   return redirect('/theme/lister')->with('msg_modif', $msg);
         return \Redirect::route('lister_info', $id)->with('msg_modif', $msg);
@@ -73,6 +72,14 @@ class UserController extends Controller
         }
         return view('user.liste_themes_suivi',['liste_themes' => $liste_themes_res]) ;
         
+    }
+    
+    public function supprimer($id) {
+        $this->model_user = $this->model_user->extract_by_id($id) ;
+        $name=$this->model_user->getName() ;
+        $this->model_user->supprimer($id) ;
+        $msg_supp = "l'utilisateur $name a été supprimé" ;
+        return \Redirect::route('lister_users')->with('msg_supp', $msg_supp) ;
     }
     
     

@@ -6,12 +6,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Utilisateurs du site</div>
                     <div class="panel-body">
+                        @if( ! empty(session('msg_supp')))
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ session('msg_supp') }}</strong>
+                            </div>
+                        @endif
                         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Pseudo</th>
-                                <th>Nom</th>
-                                <th>Prenom</th>
+                                <th>Username</th>
                                 <th>E-mail</th>
                                 <th>Télèphone</th>
                                 <th>Actions</th>
@@ -22,24 +25,30 @@
                                 <tr>
                                     @if(Auth::user()->id != $user->id)
                                         @if ($user->admin == 1)
-                                            <td>{{ $user->pseudo }} (Administrateur du site) <img
+                                            <td>{{ $user->name }} (Administrateur du site) <img
                                                         src="{{URL::asset('user/male.png')}}"></td>
                                         @else
-                                            <td>{{ $user->pseudo }}<img
-                                                        src="{{URL::asset('user/male.png')}}"></td>
-                                        @endif
-                                            <td>{{ $user->nom }}</td>
-                                            <td>{{ $user->prenom }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->telephone }}</td>
-                                            <td>
-                                                <a class="btn btn-info" href="/user/editer/{{ $user->id }}">
-                                                    <i class="glyphicon glyphicon-edit icon-white"></i>
-                                                    Edit
-                                                </a>
-                                            </td>
+                                            <td>{{ $user->name }}
+                                                @if($user->sexe === 'M')
+                                                    <img src="{{URL::asset('user/male.png')}}"></td>
+                                            @elseif($user->sexe === 'F')
+                                                <img src="{{URL::asset('user/female.png')}}"></td>
                                             @else
                                             @endif
+                                        @endif
+                                        <td>{{ $user->email }}</td>
+                                        <td> {{ !empty($user->telephone) ? $user->telephone : "non spécifié" }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="/user/editer/{{ $user->id }}">
+                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                Edit
+                                            </a>
+                                            <a class="btn btn-danger" href="/user/supprimer/{{ $user->id }}">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    @else
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

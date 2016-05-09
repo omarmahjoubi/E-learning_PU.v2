@@ -5,7 +5,7 @@
 
 
         <div class="page-header">
-            <h1 class="text-center">Nos Thémes</h1>
+            <h1 class="text-center">Nos nouveaux Thémes</h1>
         </div>
 
 

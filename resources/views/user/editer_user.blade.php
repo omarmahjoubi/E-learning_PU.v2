@@ -12,26 +12,12 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Pseudo:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="pseudo"
-                                           value="{{ $user->pseudo }}">
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           value="{{ $user->name }}">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="name">Nom:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="nom"
-                                           value="{{ $user->nom }}">
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="name">Prenom:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="prenom"
-                                           value="{{ $user->prenom }}">
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label for="exampleTextarea" class="control-label col-sm-2">E-mail</label>
